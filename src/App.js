@@ -8,24 +8,40 @@ import 'weather-icons/css/weather-icons.css';
 const apiBase = "http://api.openweathermap.org/data/2.5/weather?";
 const apiKey = "32710cb36385401192dab72b89409cea";
 
-//default value is metric; other value is imperial
-const units = "metric";
 
-// default units is metric. If button is pushed, change value to 'imperial'
+
 
 class App extends React.Component {
   
   constructor() {
     super();
-    this.state = {};
-    this.getWeather();
+    this.state = {
+      unit: "metric" // default units is metric. If button is pushed, change value to 'imperial'
+    };
+
+    this.metricToggle = this.metricToggle.bind(this);
+
+    // this.getWeather();
+  }
+
+  metricToggle() {
+    this.setState(state => {
+      if (state.unit === "metric") {
+        return { unit: "imperial" };
+        console.log(this.state.unit);
+      }
+      else {
+        return { unit: "metric" };
+        console.log(this.state.unit);
+      }
+    })
   }
 
   getWeather = async () =>  {
-    const apiCall = fetch(`${apiBase}q=London,uk&units=${units}&appid=${apiKey}`)
+    const apiCall = fetch(`${apiBase}q=London,uk&units=${this.state.unit}&appid=${apiKey}`)
     .then(res => res.json())
     .then(function(res) {
-      let weather = res["weather"][0]["main"];
+      let weather = res;
       console.log(weather);
     })
     .catch(err => console.log(err));
@@ -34,7 +50,9 @@ class App extends React.Component {
   render() {
     return (
     <div className="App">
-      <Weather /> 
+      <Weather />
+      <button onClick={this.metricToggle}>Toggle</button>
+      <button onClick={this.getWeather}>Get Weather</button>
     </div>
     );
   }
