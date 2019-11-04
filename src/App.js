@@ -23,13 +23,12 @@ class App extends React.Component {
       weatherDescription: "",
       currentTemp: undefined,
       maxTemp: undefined,
-      minTemp: undefined
+      minTemp: undefined,
     };
 
     this.metricToggle = this.metricToggle.bind(this);
     this.geolocate = this.geolocate.bind(this);
 
-    //this.getWeather();
   }
 
   handleCityChange(event) {
@@ -53,10 +52,12 @@ class App extends React.Component {
         return { unit: "metric" };
       }
     })
-    // this.getWeather();
+    this.getWeather();
   }
 
   getWeather = async () =>  {
+
+
     const apiCall = fetch(`${apiBase}q=${this.state.userInputCity},${this.state.userInputCountry}&units=${this.state.unit}&appid=${apiKey}`)
     .then(res => res.json())
     .then(res => {
@@ -79,42 +80,54 @@ class App extends React.Component {
         weatherDescription: weatherDescription,
         currentTemp: currentTemp,
         maxTemp: maxTemp,
-        minTemp: minTemp
+        minTemp: minTemp,
       });
     })
     .catch(err => console.log(err));
   };
 
   geolocate() {
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition(position => {
       let lat = position.coords.latitude;
       let long = position.coords.longitude;
 
-      const api = fetch(`${apiBase}lat=${lat}&lon=${long}&units=metric&appid=${apiKey}`)
-      .then(res => res.json())
-      .then(res => {
-        console.log(res);
-        let city = res.name;
-        let country = res.sys.country;
+      const apiCall = fetch(`${apiBase}lat=${lat}&lon=${long}&units=${this.state.unit}&appid=${apiKey}`)
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          let city = res.name;
+          let country = res.sys.country;
+          let weatherDescription = res.weather[0].main;
+          let currentTemp = res.main.temp;
+          let maxTemp = res.main.temp_max;
+          let minTemp = res.main.temp_min;
 
-        console.log(city);
-        
-        this.setState({
-          city: city,
-          country: country
-        });
-      })
-      .catch(err => console.log(err));
-    }
-    )}
-  
+          console.log(weatherDescription);
+          console.log(currentTemp);
+          console.log(maxTemp);
+          console.log(minTemp);
+
+          this.setState({
+            city: city,
+            country: country,
+            weatherDescription: weatherDescription,
+            currentTemp: currentTemp,
+            maxTemp: maxTemp,
+            minTemp: minTemp,
+            userInputCity: city,
+            userInputCountry: country
+          });
+        })
+        .catch(err => console.log(err));
+    })
+  };
 
   render() {
 
     if (this.state.city === undefined) {
 
       return (
-        
+
           <div className="App">
             <form>
                 <input id="city" type="text" placeholder="City" value={this.state.userInputCity} onChange={this.handleCityChange.bind(this)} />
