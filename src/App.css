@@ -65,6 +65,7 @@ textarea:focus, input:focus, input {
   border: none;
   border-bottom: 2px solid rgb(80, 149, 179) !important;
   color: rgb(80, 149, 179);
+  padding: 5px;
 }
 
 input::placeholder {
@@ -80,4 +81,13 @@ button {
 
 #metricToggle {
   float: right;
+}
+
+.span {
+  display: flex;
+  padding: 5px;
+}
+
+#getWeatherBtn {
+  margin-left: 10px;
 }

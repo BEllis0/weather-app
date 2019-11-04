@@ -137,12 +137,16 @@ class App extends React.Component {
             <h1 id="Title">Weather App</h1>
             <header id="search-bar" >
             <div id="top-bar">
+            <div className="span">
             <form id="input-form" >
                 <input id="city" type="text" placeholder="City" value={this.state.userInputCity} onChange={this.handleCityChange.bind(this)} />
                 <input id="country" type="text" placeholder="Country" maxLength="2" value={this.state.userInputCountry} onChange={this.handleCountryChange.bind(this)} />
             </form>
               <button id="getWeatherBtn" onClick={this.getWeather}>Get Weather</button>
+              </div>
+              <div className="span">
               <button id="metricToggle" onClick={this.metricToggle}>&deg;F / &deg;C</button>
+              </div>
             </div>
 
               <button id="getLocalBtn" onClick={this.geolocate}>Get Local Weather</button>
@@ -156,21 +160,22 @@ class App extends React.Component {
       return (
         <div className="App">
         <h1 id="Title">Weather App</h1>
-        <header id="search-bar" >
-        <div id="top-bar">
-          
-        <form id="input-form" className="inline-display">
-            <input id="city" type="text" placeholder="City" value={this.state.userInputCity} onChange={this.handleCityChange.bind(this)} />
-            <input id="country" type="text" placeholder="Country" maxLength="2" value={this.state.userInputCountry} onChange={this.handleCountryChange.bind(this)} />
-        </form>
+            <header id="search-bar" >
+            <div id="top-bar">
+            <div className="span">
+            <form id="input-form" >
+                <input id="city" type="text" placeholder="City" value={this.state.userInputCity} onChange={this.handleCityChange.bind(this)} />
+                <input id="country" type="text" placeholder="Country" maxLength="2" value={this.state.userInputCountry} onChange={this.handleCountryChange.bind(this)} />
+            </form>
+              <button id="getWeatherBtn" onClick={this.getWeather}>Get Weather</button>
+              </div>
+              <div className="span">
+              <button id="metricToggle" onClick={this.metricToggle}>&deg;F / &deg;C</button>
+              </div>
+            </div>
 
-          <button id="getWeatherBtn" className="inline-display" onClick={this.getWeather}>Get Weather</button>
-
-          <button id="metricToggle" onClick={this.metricToggle}>&deg;F / &deg;C</button>
-        </div>
-
-          <button id="getLocalBtn" onClick={this.geolocate}>Get Local Weather</button>
-        </header>
+              <button id="getLocalBtn" onClick={this.geolocate}>Get Local Weather</button>
+            </header>
           
 
         <Weather city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} unit={this.state.unit} icon={this.state.icon} />
