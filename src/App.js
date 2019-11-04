@@ -15,7 +15,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      unit: "metric", // default units is metric. If button is pushed, change value to 'imperial'
+      unit: "metric", // default units is metric. If button is pushed, changes value to 'imperial'
       userInputCity: "",
       city: undefined,
       userInputCountry: "",
@@ -46,18 +46,16 @@ class App extends React.Component {
   metricToggle() {
     this.setState(state => {
       if (state.unit === "metric") {
-        return { unit: "imperial" };
+        return {unit: "imperial"}
       }
-      else {
+      else if (state.unit === "imperial") {
         return { unit: "metric" };
       }
-    })
+    });
     this.getWeather();
   }
 
   getWeather = async () =>  {
-
-
     const apiCall = fetch(`${apiBase}q=${this.state.userInputCity},${this.state.userInputCountry}&units=${this.state.unit}&appid=${apiKey}`)
     .then(res => res.json())
     .then(res => {
@@ -129,13 +127,19 @@ class App extends React.Component {
       return (
 
           <div className="App">
-            <form>
+            <h1 id="Title">Weather App</h1>
+            <header id="search-bar" >
+            <div id="top-bar">
+            <form id="input-form" >
                 <input id="city" type="text" placeholder="City" value={this.state.userInputCity} onChange={this.handleCityChange.bind(this)} />
                 <input id="country" type="text" placeholder="Country" maxLength="2" value={this.state.userInputCountry} onChange={this.handleCountryChange.bind(this)} />
             </form>
-              <button onClick={this.metricToggle}>&deg;F / &deg;C</button>
-              <button onClick={this.getWeather}>Get Weather</button>
-              <button onClick={this.geolocate}>Geolocate</button>
+              <button id="getWeatherBtn" onClick={this.getWeather}>Get Weather</button>
+              <button id="metricToggle" onClick={this.metricToggle}>&deg;F / &deg;C</button>
+            </div>
+
+              <button id="getLocalBtn" onClick={this.geolocate}>Get Local Weather</button>
+            </header>
           </div>
           
       )
@@ -143,18 +147,26 @@ class App extends React.Component {
 
     else {
       return (
-      <div className="App">
-        
-        <form>
-          <input id="city" type="text" placeholder="City" value={this.state.userInputCity} onChange={this.handleCityChange.bind(this)} />
-          <input id="country" type="text" placeholder="Country" maxLength="2" value={this.state.userInputCountry} onChange={this.handleCountryChange.bind(this)} />
+        <div className="App">
+        <h1 id="Title">Weather App</h1>
+        <header id="search-bar" >
+        <div id="top-bar">
+          
+        <form id="input-form" className="inline-display">
+            <input id="city" type="text" placeholder="City" value={this.state.userInputCity} onChange={this.handleCityChange.bind(this)} />
+            <input id="country" type="text" placeholder="Country" maxLength="2" value={this.state.userInputCountry} onChange={this.handleCountryChange.bind(this)} />
         </form>
-        <button onClick={this.metricToggle}>&deg;F / &deg;C</button>
-        <button onClick={this.getWeather}>Get Weather</button>
-        <button onClick={this.geolocate}>Geolocate</button>
+
+          <button id="getWeatherBtn" className="inline-display" onClick={this.getWeather}>Get Weather</button>
+
+          <button id="metricToggle" onClick={this.metricToggle}>&deg;F / &deg;C</button>
+        </div>
+
+          <button id="getLocalBtn" onClick={this.geolocate}>Get Local Weather</button>
+        </header>
           
 
-        <Weather  city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} />
+        <Weather city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} unit={this.state.unit} />
       </div>
       );
     } 

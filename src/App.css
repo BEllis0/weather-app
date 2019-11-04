@@ -1,9 +1,22 @@
 .App {
   text-align: center;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 20px;
+  background-image: url("https://cdn.pixabay.com/photo/2016/07/22/16/29/fog-1535201_1280.jpg");
+  background-size: cover;
 }
 
 .App-logo {
   height: 40vmin;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+#Title {
+  color: rgb(80, 149, 179);
 }
 
 .App-header {
@@ -17,6 +30,54 @@
   color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+#search-bar {
+  padding: 15px 10px;
+  width: 100vw;
+  background-color:rgba(80, 149, 179, 0.3);
+}
+
+#top-bar {
+  height: auto;
+  width: 100vw;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 5px;
+
+}
+
+.container {
+  margin-top: 100px;
+  background-color:rgba(80, 149, 179, 0.3);
+  border-radius: 10px;
+  color: #e9f0eb;
+
+}
+
+.cards {
+  padding: 5px;
+}
+
+textarea:focus, input:focus, input {
+  outline: none;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgb(80, 149, 179) !important;
+  color: rgb(80, 149, 179);
+}
+
+input::placeholder {
+  color: rgb(80, 149, 179);
+}
+
+button {
+  color: rgb(80, 149, 179);
+  background-color: transparent;
+  border: 2px solid rgb(80, 149, 179);
+  border-radius: 10px;
+}
+
+#metricToggle {
+  float: right;
 }
