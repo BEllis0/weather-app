@@ -24,6 +24,7 @@ class App extends React.Component {
       currentTemp: undefined,
       maxTemp: undefined,
       minTemp: undefined,
+      icon: ""
     };
 
     this.metricToggle = this.metricToggle.bind(this);
@@ -66,11 +67,13 @@ class App extends React.Component {
       let currentTemp = res.main.temp;
       let maxTemp = res.main.temp_max;
       let minTemp = res.main.temp_min;
+      let icon = res.weather[0].icon
 
       console.log(weatherDescription);
       console.log(currentTemp);
       console.log(maxTemp);
       console.log(minTemp);
+      console.log(icon);
 
       this.setState({
         city: city,
@@ -79,6 +82,7 @@ class App extends React.Component {
         currentTemp: currentTemp,
         maxTemp: maxTemp,
         minTemp: minTemp,
+        icon: `http://openweathermap.org/img/wn/${icon}@2x.png`
       });
     })
     .catch(err => console.log(err));
@@ -99,11 +103,13 @@ class App extends React.Component {
           let currentTemp = res.main.temp;
           let maxTemp = res.main.temp_max;
           let minTemp = res.main.temp_min;
+          let icon = res.weather[0].icon;
 
           console.log(weatherDescription);
           console.log(currentTemp);
           console.log(maxTemp);
           console.log(minTemp);
+          console.log(icon);
 
           this.setState({
             city: city,
@@ -113,7 +119,8 @@ class App extends React.Component {
             maxTemp: maxTemp,
             minTemp: minTemp,
             userInputCity: city,
-            userInputCountry: country
+            userInputCountry: country,
+            icon: `http://openweathermap.org/img/wn/${icon}@2x.png`
           });
         })
         .catch(err => console.log(err));
@@ -166,7 +173,7 @@ class App extends React.Component {
         </header>
           
 
-        <Weather city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} unit={this.state.unit} />
+        <Weather city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} unit={this.state.unit} icon={this.state.icon} />
       </div>
       );
     } 

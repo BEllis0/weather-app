@@ -8,7 +8,7 @@ const Weather = (props) => {
             <div className="cards">
                 <h1>{props.city}, {props.country}</h1>
                 <h5 className="py-4">
-                    <i className="wi wi-day-sunny display-1"></i>
+                    <img id="weatherImg" src={props.icon} />
                 </h5>
 
                 {props.unit === "metric" && 
