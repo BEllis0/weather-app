@@ -29,6 +29,7 @@ class App extends React.Component {
 
     this.metricToggle = this.metricToggle.bind(this);
     this.geolocate = this.geolocate.bind(this);
+    this.saveWeather = this.saveWeather.bind(this);
 
   }
 
@@ -54,7 +55,7 @@ class App extends React.Component {
       }
     });
     this.getWeather();
-  }
+  };
 
   getWeather = async () =>  {
     const apiCall = fetch(`${apiBase}q=${this.state.userInputCity},${this.state.userInputCountry}&units=${this.state.unit}&appid=${apiKey}`)
@@ -127,6 +128,10 @@ class App extends React.Component {
     })
   };
 
+  saveWeather = () => {
+    console.log(this.state.name);
+  };
+
   render() {
 
     if (this.state.city === undefined) {
@@ -184,7 +189,7 @@ class App extends React.Component {
             </div>
             </header>
           
-        <Weather city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} unit={this.state.unit} icon={this.state.icon} />
+        <Weather city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} unit={this.state.unit} icon={this.state.icon} saveWeather={this.saveWeather} />
       </div>
       );
     } 

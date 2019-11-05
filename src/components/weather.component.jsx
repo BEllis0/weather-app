@@ -2,7 +2,6 @@ import React from 'react';
 
 const Weather = (props) => {
 
-
     return (
         <div className="container">
             <div className="cards">
@@ -34,6 +33,8 @@ const Weather = (props) => {
                     <span className="px-4">{Math.round(props.maxTemp)}&deg;F</span>
                 </h3>
                 }
+
+                <button onClick={props.saveWeather}>test</button>
             </div>
         </div>
     );
