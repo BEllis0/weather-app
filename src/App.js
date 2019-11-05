@@ -3,12 +3,12 @@ import '/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/
 import Weather from "/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/components/weather.component.jsx";
 import SearchBar from "/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/components/SearchBar.jsx";
 import PreSearch from "/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/components/pre-search.jsx";
-
+import SavedWeather from "/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/components/savedWeather.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
 
 const apiBase = "http://api.openweathermap.org/data/2.5/weather?";
 const apiKey = "32710cb36385401192dab72b89409cea";
-
 
 class App extends React.Component {
   
@@ -24,14 +24,29 @@ class App extends React.Component {
       currentTemp: undefined,
       maxTemp: undefined,
       minTemp: undefined,
-      icon: ""
+      icon: "",
+      savedCities: [
+        {key: 1, name: "", country: "test1country"},
+        {key: 2, name: "", country: "test2country"}
+      ],
+      displaySaved: false
     };
 
     this.metricToggle = this.metricToggle.bind(this);
     this.geolocate = this.geolocate.bind(this);
-    this.saveWeather = this.saveWeather.bind(this);
 
   }
+
+  displaySaved = () => {
+    this.setState({
+      displaySaved: !this.state.displaySaved
+    });
+
+    $(function() {
+      $('.SavedWeather').css()
+    })
+
+  };
 
   handleCityChange(event) {
     this.setState({
@@ -128,10 +143,6 @@ class App extends React.Component {
     })
   };
 
-  saveWeather = () => {
-    console.log(this.state.name);
-  };
-
   render() {
 
     if (this.state.city === undefined) {
@@ -188,8 +199,31 @@ class App extends React.Component {
               </div>
             </div>
             </header>
-          
+        
+        <div className="main-section">
         <Weather city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} unit={this.state.unit} icon={this.state.icon} saveWeather={this.saveWeather} />
+        
+        {/* <SavedWeather displaySaved={this.state.displaySaved} savedCities={this.state.savedCities} /> */}
+        </div>
+
+        {/* button and logic handles saved weather */}
+        <button className="btn" onClick={this.displaySaved}>Save this location</button>
+        
+        
+        {
+           this.state.displaySaved && 
+  
+          <div>
+            {this.state.savedCities.map((place, index) => {
+               return <SavedWeather
+               key={place.key}
+               name={place.name}
+               country={place.country} />
+            })}
+          </div>
+        
+        }
+
       </div>
       );
     } 

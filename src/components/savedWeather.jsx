@@ -1,16 +1,12 @@
 import React from 'react';
 
-class SavedWeather extends React.Component {
-    constructor(props) {
-        super(props);
+const SavedWeather = (props) => {
 
-    }
-
-    render() {
-        return (
-            <div>test</div>
-        );
-    };
+    return (
+        <div className="SavedWeather">
+            <p>{props.name}, {props.country}</p>
+        </div>
+    )
 }
 
 export default SavedWeather;
