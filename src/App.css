@@ -11,6 +11,7 @@
   height: 100vh;
   background-image: url("https://cdn.pixabay.com/photo/2016/07/22/16/29/fog-1535201_1280.jpg");
   background-size: cover;
+  overflow: hidden;
 }
 
 .App-logo {
@@ -64,7 +65,7 @@
   background-color:rgba(80, 149, 179, 0.3);
   border-radius: 10px;
   color: #e9f0eb;
-
+  /* width: 600px !important; */
 }
 
 .cards {
@@ -112,4 +113,19 @@ button {
   width: 70%;
   text-align: center;
   align-content: center;
+}
+
+.savedWeatherList {
+  padding: 5px;
+}
+
+.savedItem {
+  color: white;
+  background-color:rgba(80, 149, 179, 0.3);
+  padding: 10px;
+  font-size:20px;
+  width: 200px;
+  margin: auto;
+  margin-top: 5px;
+  border-radius: 15px;
 }

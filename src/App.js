@@ -27,26 +27,57 @@ class App extends React.Component {
       icon: "",
       savedCities: [
         {key: 1, name: "", country: "test1country"},
-        {key: 2, name: "", country: "test2country"}
+        {key: 2, name: "London", country: "Uk"}
       ],
       displaySaved: false
     };
 
     this.metricToggle = this.metricToggle.bind(this);
     this.geolocate = this.geolocate.bind(this);
+    this.dispaySaved = this.displaySaved.bind(this);
+    this.useSaved = this.useSaved.bind(this);
 
   }
 
   displaySaved = () => {
-    this.setState({
-      displaySaved: !this.state.displaySaved
-    });
+
+    let newCity = this.state.savedCities;
+    newCity[0].name = this.state.city;
+
+    let newCountry = this.state.savedCities;
+    newCountry[0].country = this.state.country;
+
+    this.setState(previousState => ({
+      displaySaved: !this.state.displaySaved,
+      savedCities: [...previousState.savedCities , this.state.city ]
+    }));
 
     $(function() {
-      $('.SavedWeather').css()
+      $('.main-section').css({'display': 'flex', 'flex-direction': 'row', 'flex-wrap': 'nowrap', 'justify-content': 'space-evenly', 'align-items': 'center'});
+      $('.container').css('width', '600px');
     })
 
   };
+
+
+  // issues to resolve
+  useSaved() {
+
+    let newCity = this.state.savedCities;
+    newCity[0].name = this.state.city;
+
+    let newCountry = this.state.savedCities;
+    newCountry[0].country = this.state.country;
+
+    this.setState({
+      city: newCity,
+      country: newCountry
+    });
+
+    console.log(this.state.city);
+
+    this.getWeather();
+  }
 
   handleCityChange(event) {
     this.setState({
@@ -201,21 +232,20 @@ class App extends React.Component {
             </header>
         
         <div className="main-section">
-        <Weather city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} unit={this.state.unit} icon={this.state.icon} saveWeather={this.saveWeather} />
-        
-        {/* <SavedWeather displaySaved={this.state.displaySaved} savedCities={this.state.savedCities} /> */}
-        </div>
+        <div className="weather-main">
+        <Weather city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} unit={this.state.unit} icon={this.state.icon} displaySaved={this.displaySaved} />
+        </div>  
 
-        {/* button and logic handles saved weather */}
-        <button className="btn" onClick={this.displaySaved}>Save this location</button>
-        
-        
+        {/* logic handles displaying saved weather */}
+        <div className="saved-main">
         {
            this.state.displaySaved && 
   
           <div>
             {this.state.savedCities.map((place, index) => {
                return <SavedWeather
+               city={this.state.city}
+               action={this.useSaved}
                key={place.key}
                name={place.name}
                country={place.country} />
@@ -223,7 +253,8 @@ class App extends React.Component {
           </div>
         
         }
-
+        </div>
+        </div>
       </div>
       );
     } 
