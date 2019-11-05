@@ -7,8 +7,11 @@
     "bootstrap": "^4.3.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0",
-    "weather-icons": "git+https://github.com/erikflowers/weather-icons.git"
+    "react-scripts": "3.2.0"
+  },
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

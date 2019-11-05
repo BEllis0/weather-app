@@ -5,8 +5,6 @@ import SearchBar from "/Users/brandonellis/Documents/Code Projects/weather-app/w
 import PreSearch from "/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/components/pre-search.jsx";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'weather-icons/css/weather-icons.css';
-
 
 const apiBase = "http://api.openweathermap.org/data/2.5/weather?";
 const apiKey = "32710cb36385401192dab72b89409cea";
