@@ -184,8 +184,6 @@ class App extends React.Component {
               <button id="metricToggle" onClick={this.metricToggle}>&deg;F / &deg;C</button>
               </div>
             </div>
-
-              
             </header>
           
         <Weather city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} unit={this.state.unit} icon={this.state.icon} />
