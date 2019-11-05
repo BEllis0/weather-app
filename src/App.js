@@ -2,6 +2,8 @@ import React from 'react';
 import '/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/App.css';
 import Weather from "/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/components/weather.component.jsx";
 import SearchBar from "/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/components/SearchBar.jsx";
+import PreSearch from "/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/components/pre-search.jsx";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'weather-icons/css/weather-icons.css';
 
@@ -134,7 +136,10 @@ class App extends React.Component {
       return (
 
           <div className="App">
+            <div className="header">
             <h1 id="Title">Weather App</h1>
+            <button id="getLocalBtn" onClick={this.geolocate}>Get Local Weather</button>
+            </div>
             <header id="search-bar" >
             <div id="top-bar">
             <div className="span">
@@ -149,8 +154,11 @@ class App extends React.Component {
               </div>
             </div>
 
-              <button id="getLocalBtn" onClick={this.geolocate}>Get Local Weather</button>
+              
             </header>
+
+            <PreSearch />
+          
           </div>
           
       )
@@ -159,7 +167,10 @@ class App extends React.Component {
     else {
       return (
         <div className="App">
-        <h1 id="Title">Weather App</h1>
+            <div className="header">
+            <h1 id="Title">Weather App</h1>
+            <button id="getLocalBtn" onClick={this.geolocate}>Get Local Weather</button>
+            </div>
             <header id="search-bar" >
             <div id="top-bar">
             <div className="span">
@@ -174,10 +185,9 @@ class App extends React.Component {
               </div>
             </div>
 
-              <button id="getLocalBtn" onClick={this.geolocate}>Get Local Weather</button>
+              
             </header>
           
-
         <Weather city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} unit={this.state.unit} icon={this.state.icon} />
       </div>
       );

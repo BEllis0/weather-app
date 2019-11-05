@@ -1,8 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins|Saira+Condensed|Ubuntu&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 650;
+}
+
 .App {
   text-align: center;
   width: 100vw;
   height: 100vh;
-  padding-top: 20px;
   background-image: url("https://cdn.pixabay.com/photo/2016/07/22/16/29/fog-1535201_1280.jpg");
   background-size: cover;
 }
@@ -44,7 +50,13 @@
   align-items: center;
   justify-content: space-evenly;
   padding: 5px;
+}
 
+.header {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 5px;
+  background-color:rgba(19, 132, 180, 0.3);
 }
 
 .container {
@@ -76,11 +88,12 @@ button {
   color: rgb(80, 149, 179);
   background-color: transparent;
   border: 2px solid rgb(80, 149, 179);
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 #metricToggle {
-  float: right;
+  border-radius: 12px;
+  padding: 5px;
 }
 
 .span {
@@ -90,4 +103,13 @@ button {
 
 #getWeatherBtn {
   margin-left: 10px;
+}
+
+.pre-search {
+  margin-top: 100px !important;
+  margin: auto;
+  color: rgb(80, 149, 179);
+  width: 70%;
+  text-align: center;
+  align-content: center;
 }
