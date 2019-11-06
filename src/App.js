@@ -56,21 +56,39 @@ class App extends React.Component {
 
     console.log(this.state.savedCities.length);
     
-    let newPlace = {};
 
     //handles the max number of saved entries, and updates savedCities array
 
+    //NEED TO HANDLE DUPLICATES
+
     if (this.state.savedCities.length <= 5) {
-      this.setState(previousState => ({
-        savedCities: [...previousState.savedCities , newCity ]
-      }));
+
+      if (newCity[newCity.length-1].name.match(newCity[0].name)) {
+        this.setState((previousState) => ({
+          savedCities: [...previousState.savedCities, newCity]
+        }));
+      }
     };
 
     // create jquery file and move this ----
 
     $(function() {
-      $('.main-section').css({'display': 'flex', 'flex-direction': 'row', 'flex-wrap': 'nowrap', 'justify-content': 'space-evenly', 'align-items': 'center'});
+      // $('.main-section').css({'display': 'flex', 'flex-direction': 'row', 'flex-wrap': 'nowrap', 'justify-content': 'space-evenly', 'align-items': 'center'});
       $('.container').css('width', '600px');
+
+      // $('.save-location-btn').click(function() {
+      //   $('.main-section').animate({
+      //       display: 'flex',
+      //       flexDirection: 'row',
+      //       flexWrap: 'nowrap',
+      //       justifyContent: 'space-evenly',
+      //       alignItems: 'center'
+      //   }, 5000);
+      // });
+
+      $('#Title').click(function() {
+        alert('asdf');
+    })
     })
 
   };
