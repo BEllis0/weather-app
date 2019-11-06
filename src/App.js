@@ -26,8 +26,7 @@ class App extends React.Component {
       minTemp: undefined,
       icon: "",
       savedCities: [
-        {key: 1, name: "", country: "test1country"},
-        {key: 2, name: "London", country: "Uk"}
+        {key: 1, name: "", country: ""},
       ],
       displaySaved: false
     };
@@ -51,6 +50,8 @@ class App extends React.Component {
       displaySaved: !this.state.displaySaved,
       savedCities: [...previousState.savedCities , this.state.city ]
     }));
+
+    // create jquery file and move this ----
 
     $(function() {
       $('.main-section').css({'display': 'flex', 'flex-direction': 'row', 'flex-wrap': 'nowrap', 'justify-content': 'space-evenly', 'align-items': 'center'});

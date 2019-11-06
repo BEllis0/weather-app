@@ -34,7 +34,7 @@ const Weather = (props) => {
                 </h3>
                 }
 
-                <button className="btn" onClick={props.displaySaved}>Save this location</button>
+                <button className="btn save-location-btn" onClick={props.displaySaved}><span className="plus-btn">+</span> Save location</button>
             </div>
         </div>
     );

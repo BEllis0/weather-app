@@ -129,3 +129,12 @@ button {
   margin-top: 5px;
   border-radius: 15px;
 }
+
+.save-location-btn {
+  font-size: 22px !important;
+  color: white !important;
+}
+
+.plus-btn {
+  font-size: 30px !important;
+}
