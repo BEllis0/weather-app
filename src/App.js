@@ -26,7 +26,7 @@ class App extends React.Component {
       minTemp: undefined,
       icon: "",
       savedCities: [
-        {key: 1, name: "", country: ""},
+        {key: 1, name: "", country: ""}
       ],
       displaySaved: false
     };
@@ -38,18 +38,33 @@ class App extends React.Component {
 
   }
 
+  //build to handle removes
+  removeSaved = (e) => {
+    let arr = [...this.state.savedCities];
+  }
+
   displaySaved = () => {
 
+    this.setState({
+      displaySaved: true
+    })
+
     let newCity = this.state.savedCities;
-    newCity[0].name = this.state.city;
-
+    newCity[this.state.savedCities.length-1].name = this.state.city;
     let newCountry = this.state.savedCities;
-    newCountry[0].country = this.state.country;
+    newCountry[this.state.savedCities.length-1].country = this.state.country;
 
-    this.setState(previousState => ({
-      displaySaved: !this.state.displaySaved,
-      savedCities: [...previousState.savedCities , this.state.city ]
-    }));
+    console.log(this.state.savedCities.length);
+    
+    let newPlace = {};
+
+    //handles the max number of saved entries, and updates savedCities array
+
+    if (this.state.savedCities.length <= 5) {
+      this.setState(previousState => ({
+        savedCities: [...previousState.savedCities , newCity ]
+      }));
+    };
 
     // create jquery file and move this ----
 
@@ -62,21 +77,21 @@ class App extends React.Component {
 
 
   // issues to resolve
-  useSaved() {
+  useSaved(name, country) {
 
-    let newCity = this.state.savedCities;
-    newCity[0].name = this.state.city;
-
-    let newCountry = this.state.savedCities;
-    newCountry[0].country = this.state.country;
-
-    this.setState({
-      city: newCity,
-      country: newCountry
+    console.log(name, country);
+    
+    this.setState((previous, current) => {
+      return {
+        userInputCity: name,
+        userInputCountry: country
+      }
     });
 
-    console.log(this.state.city);
+    this.callGetWeather();
+  }
 
+  callGetWeather = () => {
     this.getWeather();
   }
 
@@ -117,11 +132,11 @@ class App extends React.Component {
       let minTemp = res.main.temp_min;
       let icon = res.weather[0].icon
 
-      console.log(weatherDescription);
-      console.log(currentTemp);
-      console.log(maxTemp);
-      console.log(minTemp);
-      console.log(icon);
+      // console.log(weatherDescription);
+      // console.log(currentTemp);
+      // console.log(maxTemp);
+      // console.log(minTemp);
+      // console.log(icon);
 
       this.setState({
         city: city,
@@ -246,7 +261,7 @@ class App extends React.Component {
             {this.state.savedCities.map((place, index) => {
                return <SavedWeather
                city={this.state.city}
-               action={this.useSaved}
+               useSaved={this.useSaved}
                key={place.key}
                name={place.name}
                country={place.country} />
