@@ -26,7 +26,7 @@ class App extends React.Component {
       minTemp: undefined,
       icon: "",
       savedCities: [
-        {key: 1, name: "", country: ""}
+        // structure: {key: 1-, name: "", country: ""} add weather?
       ],
       displaySaved: false
     };
@@ -43,29 +43,26 @@ class App extends React.Component {
     let arr = [...this.state.savedCities];
   }
 
+  // changes from false to true, which changes the design display
   displaySaved = () => {
 
     this.setState({
       displaySaved: true
     })
 
-    let newCity = this.state.savedCities;
-    newCity[this.state.savedCities.length-1].name = this.state.city;
-    let newCountry = this.state.savedCities;
-    newCountry[this.state.savedCities.length-1].country = this.state.country;
-
-    console.log(this.state.savedCities.length);
+    //handles the max number of saved entries, duplicates, and updates savedCities array
     
+    //sets the first saved city object
+    if (this.state.savedCities.length === 0) {
+      this.setState({
+        savedCities: [{key: 1, name: this.state.city, country: this.state.country}]
+      })
+    }
 
-    //handles the max number of saved entries, and updates savedCities array
-
-    //NEED TO HANDLE DUPLICATES
-
-    if (this.state.savedCities.length <= 5) {
-
-      if (newCity[newCity.length-1].name.match(newCity[0].name)) {
+    if (this.state.savedCities.length >= 1 && this.state.savedCities.length <= 5) { // handles max entries
+      if (this.state.savedCities[this.state.savedCities.length-1].name !== this.state.city) { // handles duplicates
         this.setState((previousState) => ({
-          savedCities: [...previousState.savedCities, newCity]
+          savedCities: [...previousState.savedCities, {key: this.state.savedCities[this.state.savedCities.length-1].key + 1, name: this.state.city, country: this.state.country}]
         }));
       }
     };
@@ -73,7 +70,7 @@ class App extends React.Component {
     // create jquery file and move this ----
 
     $(function() {
-      // $('.main-section').css({'display': 'flex', 'flex-direction': 'row', 'flex-wrap': 'nowrap', 'justify-content': 'space-evenly', 'align-items': 'center'});
+      $('.main-section').css({'display': 'flex', 'flex-direction': 'row', 'flex-wrap': 'nowrap', 'justify-content': 'space-evenly', 'align-items': 'center'});
       $('.container').css('width', '600px');
 
       // $('.save-location-btn').click(function() {
@@ -85,16 +82,12 @@ class App extends React.Component {
       //       alignItems: 'center'
       //   }, 5000);
       // });
-
-      $('#Title').click(function() {
-        alert('asdf');
-    })
     })
 
   };
 
 
-  // issues to resolve
+  // issues to resolve with setState not changing fast enough for fetch
   useSaved(name, country) {
 
     console.log(name, country);

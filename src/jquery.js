@@ -10,10 +10,10 @@ $(function() {
     // $('.save-location-btn').click(function() {
     //     $('.main-section').animate({
     //         'display': 'flex',
-    //         'flex-direction': 'row',
-    //         'flex-wrap': 'nowrap',
-    //         'justify-content': 'space-evenly',
-    //         'align-items': 'center'
+    //         'flexDirection': 'row',
+    //         'flexWrap': 'nowrap',
+    //         'justifyContent': 'space-evenly',
+    //         'alignItems': 'center'
     //     }, 2000);
     // });
 });
