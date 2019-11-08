@@ -1,5 +1,6 @@
 import React from 'react';
-import '/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/App.css';
+// import '/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/App.css';
+import '/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/App.css'
 import Weather from "/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/components/weather.component.jsx";
 import SearchBar from "/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/components/SearchBar.jsx";
 import PreSearch from "/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/components/pre-search.jsx";
