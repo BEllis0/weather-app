@@ -35,12 +35,23 @@ class App extends React.Component {
     this.geolocate = this.geolocate.bind(this);
     this.dispaySaved = this.displaySaved.bind(this);
     this.useSaved = this.useSaved.bind(this);
-
+    this.removeSaved = this.removeSaved.bind(this);
   }
 
   //build to handle removes
-  removeSaved = (e) => {
-    let arr = [...this.state.savedCities];
+  removeSaved(name, country) {
+    let filteredCities = this.state.savedCities.filter(place =>
+      place.name !== name
+    );
+
+    this.setState({
+      savedCities: filteredCities
+    })
+
+    if (this.state.savedCities.length === 1) {
+      $('.main-section').css({'display': 'block', 'flex-direction': 'row', 'flex-wrap': 'nowrap', 'justify-content': 'space-evenly', 'align-items': 'center'});
+      $('.container').css('width', 'auto');
+    }
   }
 
   // changes from false to true, which changes the design display
@@ -72,20 +83,15 @@ class App extends React.Component {
     $(function() {
       $('.main-section').css({'display': 'flex', 'flex-direction': 'row', 'flex-wrap': 'nowrap', 'justify-content': 'space-evenly', 'align-items': 'center'});
       $('.container').css('width', '600px');
-
-      // $('.save-location-btn').click(function() {
-      //   $('.main-section').animate({
-      //       display: 'flex',
-      //       flexDirection: 'row',
-      //       flexWrap: 'nowrap',
-      //       justifyContent: 'space-evenly',
-      //       alignItems: 'center'
-      //   }, 5000);
-      // });
+      $('.savedWeatherList').hover(function() {
+        $('#remove-saved-btn').html('-');
+        $('#remove-saved-btn').addClass("removeOnHover")
+      }, function() {
+        $('#remove-saved-btn').html('');
+        $('#remove-saved-btn').removeClass("removeOnHover");
+      })
     })
-
   };
-
 
   // issues to resolve with setState not changing fast enough for fetch
   useSaved(name, country) {
@@ -99,10 +105,6 @@ class App extends React.Component {
       }
     });
 
-    this.callGetWeather();
-  }
-
-  callGetWeather = () => {
     this.getWeather();
   }
 
@@ -160,6 +162,8 @@ class App extends React.Component {
       });
     })
     .catch(err => console.log(err));
+
+
   };
 
   geolocate() {
@@ -273,6 +277,7 @@ class App extends React.Component {
                return <SavedWeather
                city={this.state.city}
                useSaved={this.useSaved}
+               removeSaved={this.removeSaved}
                key={place.key}
                name={place.name}
                country={place.country} />
