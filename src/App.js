@@ -38,7 +38,6 @@ class App extends React.Component {
     this.removeSaved = this.removeSaved.bind(this);
   }
 
-  //build to handle removes
   removeSaved(name, country) {
     let filteredCities = this.state.savedCities.filter(place =>
       place.name !== name
@@ -103,9 +102,7 @@ class App extends React.Component {
         userInputCity: name,
         userInputCountry: country
       }
-    });
-
-    this.getWeather();
+    }, () => this.getWeather());
   }
 
   handleCityChange(event) {
@@ -128,8 +125,7 @@ class App extends React.Component {
       else if (state.unit === "imperial") {
         return { unit: "metric" };
       }
-    });
-    this.getWeather();
+    }, () => this.getWeather());
   };
 
   getWeather = async () =>  {
