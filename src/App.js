@@ -36,6 +36,8 @@ class App extends React.Component {
     this.dispaySaved = this.displaySaved.bind(this);
     this.useSaved = this.useSaved.bind(this);
     this.removeSaved = this.removeSaved.bind(this);
+    this.handleCityChange = this.handleCityChange.bind(this);
+    this.handleCountryChange = this.handleCountryChange.bind(this);
   }
 
   removeSaved(name, country) {
@@ -92,7 +94,6 @@ class App extends React.Component {
     })
   };
 
-  // issues to resolve with setState not changing fast enough for fetch
   useSaved(name, country) {
 
     console.log(name, country);
@@ -208,26 +209,15 @@ class App extends React.Component {
       return (
 
           <div className="App">
-            <div className="header">
-            <h1 id="Title">Weather App</h1>
-            <button id="getLocalBtn" onClick={this.geolocate}>Get Local Weather</button>
-            </div>
-            <header id="search-bar" >
-            <div id="top-bar">
-            <div className="span">
-            <form id="input-form" >
-                <input id="city" type="text" placeholder="City" value={this.state.userInputCity} onChange={this.handleCityChange.bind(this)} />
-                <input id="country" type="text" placeholder="Country" maxLength="2" value={this.state.userInputCountry} onChange={this.handleCountryChange.bind(this)} />
-            </form>
-              <button id="getWeatherBtn" onClick={this.getWeather}>Get Weather</button>
-              </div>
-              <div className="span">
-              <button id="metricToggle" onClick={this.metricToggle}>&deg;F / &deg;C</button>
-              </div>
-            </div>
 
-              
-            </header>
+            <SearchBar
+            geolocate={this.geolocate}
+            metricToggle={this.metricToggle}
+            getWeather={this.getWeather} 
+            userInputCountry={this.state.userInputCountry}
+            userInputCity={this.state.userInputCity}
+            handleCityChange={this.handleCityChange}
+            handleCountryChange={this.handleCountryChange} />
 
             <PreSearch />
           
@@ -239,49 +229,40 @@ class App extends React.Component {
     else {
       return (
         <div className="App">
-            <div className="header">
-            <h1 id="Title">Weather App</h1>
-            <button id="getLocalBtn" onClick={this.geolocate}>Get Local Weather</button>
-            </div>
-            <header id="search-bar" >
-            <div id="top-bar">
-            <div className="span">
-            <form id="input-form" >
-                <input id="city" type="text" placeholder="City" value={this.state.userInputCity} onChange={this.handleCityChange.bind(this)} />
-                <input id="country" type="text" placeholder="Country" maxLength="2" value={this.state.userInputCountry} onChange={this.handleCountryChange.bind(this)} />
-            </form>
-              <button id="getWeatherBtn" onClick={this.getWeather}>Get Weather</button>
-              </div>
-              <div className="span">
-              <button id="metricToggle" onClick={this.metricToggle}>&deg;F / &deg;C</button>
-              </div>
-            </div>
-            </header>
+            
+        <SearchBar
+        geolocate={this.geolocate}
+        metricToggle={this.metricToggle}
+        getWeather={this.getWeather} 
+        userInputCountry={this.state.userInputCountry}
+        userInputCity={this.state.userInputCity}
+        handleCityChange={this.handleCityChange}
+        handleCountryChange={this.handleCountryChange} />
         
         <div className="main-section">
-        <div className="weather-main">
-        <Weather city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} unit={this.state.unit} icon={this.state.icon} displaySaved={this.displaySaved} />
-        </div>  
+          <div className="weather-main">
+          <Weather city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} unit={this.state.unit} icon={this.state.icon} displaySaved={this.displaySaved} />
+          </div>  
 
-        {/* logic handles displaying saved weather */}
-        <div className="saved-main">
-        {
-           this.state.displaySaved && 
-  
-          <div>
-            {this.state.savedCities.map((place, index) => {
-               return <SavedWeather
-               city={this.state.city}
-               useSaved={this.useSaved}
-               removeSaved={this.removeSaved}
-               key={place.key}
-               name={place.name}
-               country={place.country} />
-            })}
-          </div>
+          {/* logic handles displaying saved weather */}
+          <div className="saved-main">
+          {
+            this.state.displaySaved && 
+    
+            <div>
+              {this.state.savedCities.map((place, index) => {
+                return <SavedWeather
+                city={this.state.city}
+                useSaved={this.useSaved}
+                removeSaved={this.removeSaved}
+                key={place.key}
+                name={place.name}
+                country={place.country} />
+              })}
+            </div>
         
-        }
-        </div>
+          }
+          </div>
         </div>
       </div>
       );
