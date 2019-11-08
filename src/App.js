@@ -25,6 +25,11 @@ class App extends React.Component {
       currentTemp: undefined,
       maxTemp: undefined,
       minTemp: undefined,
+      humidity: undefined,
+      wind: undefined,
+      clouds: undefined,
+      sunrise: undefined,
+      sunset: undefined,
       icon: "",
       savedCities: [
         // structure: {key: 1-, name: "", country: ""} add weather?
@@ -83,13 +88,11 @@ class App extends React.Component {
     // create jquery file and move this ----
 
     $(function() {
-      $('.main-section').css({'display': 'flex', 'flex-direction': 'row', 'flex-wrap': 'nowrap', 'justify-content': 'space-evenly', 'align-items': 'center'});
-      $('.container').css('width', '600px');
-      $('.savedWeatherList').hover(function() {
-        $('#remove-saved-btn').html('-');
-        $('#remove-saved-btn').addClass("removeOnHover")
+      $('.savedItem').hover(function() {
+        $('.remove-saved-btn').html('-');
+        $('.remove-saved-btn').addClass("removeOnHover")
       }, function() {
-        $('#remove-saved-btn').html('');
+        $('.remove-saved-btn').html('');
         $('#remove-saved-btn').removeClass("removeOnHover");
       })
     })
@@ -141,13 +144,18 @@ class App extends React.Component {
       let currentTemp = res.main.temp;
       let maxTemp = res.main.temp_max;
       let minTemp = res.main.temp_min;
-      let icon = res.weather[0].icon
+      let icon = res.weather[0].icon;
+      let humidity = res.main.humidity; //percentage
+      let wind = res.wind.speed;
+      let clouds = res.clouds.all; //percentage
+      let sunrise = res.sys.sunrise;
+      let sunset = res.sys.sunset;
 
-      // console.log(weatherDescription);
-      // console.log(currentTemp);
-      // console.log(maxTemp);
-      // console.log(minTemp);
-      // console.log(icon);
+      console.log(humidity);
+      console.log(wind);
+      console.log(clouds);
+      console.log(sunrise);
+      console.log(sunset);
 
       this.setState({
         city: city,
@@ -156,6 +164,11 @@ class App extends React.Component {
         currentTemp: currentTemp,
         maxTemp: maxTemp,
         minTemp: minTemp,
+        humidity: humidity,
+        wind: wind,
+        clouds: clouds,
+        sunrise: sunrise,
+        sunset: sunset,
         icon: `http://openweathermap.org/img/wn/${icon}@2x.png`
       });
     })
@@ -241,12 +254,7 @@ class App extends React.Component {
         handleCountryChange={this.handleCountryChange} />
         
         <div className="main-section">
-          <div className="weather-main">
-          <Weather city={this.state.city} country={this.state.country} weather={this.state.weatherDescription} currentTemp={this.state.currentTemp} maxTemp={this.state.maxTemp} minTemp={this.state.minTemp} unit={this.state.unit} icon={this.state.icon} displaySaved={this.displaySaved} />
-          </div>  
-
-          {/* logic handles displaying saved weather */}
-          <div className="saved-main">
+        <div className="saved-main">
           {
             this.state.displaySaved && 
     
@@ -264,6 +272,24 @@ class App extends React.Component {
         
           }
           </div>
+
+          <div className="weather-main">
+          <Weather 
+          city={this.state.city}
+          country={this.state.country}
+          weather={this.state.weatherDescription}
+          currentTemp={this.state.currentTemp}
+          maxTemp={this.state.maxTemp}
+          minTemp={this.state.minTemp}
+          unit={this.state.unit}
+          icon={this.state.icon}
+          displaySaved={this.displaySaved}
+          humidity={this.state.humidity}
+          wind={this.state.wind}
+          clouds={this.state.clouds}
+          sunrise={this.state.sunrise}
+          sunset={this.state.sunset} />
+          </div>  
         </div>
       </div>
       );
