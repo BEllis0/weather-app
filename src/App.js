@@ -98,6 +98,22 @@ class App extends React.Component {
     })
   };
 
+  convertDate = () => {
+
+      let sunriseDate = new Date(this.state.sunrise * 1000)
+      let sunriseHours = sunriseDate.getHours();
+      let sunriseMinutes = "0" + sunriseDate.getMinutes()
+
+      let sunsetDate = new Date(this.state.sunset * 1000)
+      let sunsetHours = sunsetDate.getHours();
+      let sunsetMinutes = "0" + sunsetDate.getMinutes()
+      
+      this.setState({
+         sunrise: `${sunriseHours}:${sunriseMinutes}`,
+         sunset: `${sunsetHours}:${sunsetMinutes}`
+      })  
+  }
+
   useSaved(name, country) {
 
     console.log(name, country);
@@ -151,12 +167,6 @@ class App extends React.Component {
       let sunrise = res.sys.sunrise;
       let sunset = res.sys.sunset;
 
-      console.log(humidity);
-      console.log(wind);
-      console.log(clouds);
-      console.log(sunrise);
-      console.log(sunset);
-
       this.setState({
         city: city,
         country: country,
@@ -170,10 +180,11 @@ class App extends React.Component {
         sunrise: sunrise,
         sunset: sunset,
         icon: `http://openweathermap.org/img/wn/${icon}@2x.png`
-      });
+      }, () => this.convertDate());
     })
     .catch(err => console.log(err));
 
+    
 
   };
 
@@ -193,12 +204,11 @@ class App extends React.Component {
           let maxTemp = res.main.temp_max;
           let minTemp = res.main.temp_min;
           let icon = res.weather[0].icon;
-
-          console.log(weatherDescription);
-          console.log(currentTemp);
-          console.log(maxTemp);
-          console.log(minTemp);
-          console.log(icon);
+          let humidity = res.main.humidity; //percentage
+          let wind = res.wind.speed;
+          let clouds = res.clouds.all; //percentage
+          let sunrise = res.sys.sunrise;
+          let sunset = res.sys.sunset;
 
           this.setState({
             city: city,
@@ -207,10 +217,15 @@ class App extends React.Component {
             currentTemp: currentTemp,
             maxTemp: maxTemp,
             minTemp: minTemp,
+            humidity: humidity,
+            wind: wind,
+            clouds: clouds,
+            sunrise: sunrise,
+            sunset: sunset,
             userInputCity: city,
             userInputCountry: country,
             icon: `http://openweathermap.org/img/wn/${icon}@2x.png`
-          });
+          }, () => this.convertDate());
         })
         .catch(err => console.log(err));
     })

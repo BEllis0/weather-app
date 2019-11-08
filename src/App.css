@@ -62,6 +62,10 @@
 
 .container {
   margin-top: 10px;
+  width: 60% !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
   background-color:rgba(80, 149, 179, 0.3);
   border-radius: 10px;
   color: #e9f0eb;
@@ -69,6 +73,13 @@
 
 .cards {
   padding: 5px;
+  width: 50%;
+}
+
+.card-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 textarea:focus, input:focus, input {
@@ -144,18 +155,6 @@ button {
 .plus-btn {
   font-size: 30px !important;
 }
-
-/* #remove-saved-btn {
-  width: 22px;
-  height: 22px;
-  text-align: center;
-  margin-left: 15px;
-}
-
-#remove-saved-btn:hover {
-  border-radius: 50% 50%;
-  background-color: red;
-} */
 
 .removeOnHover {
   width: 22px;

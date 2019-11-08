@@ -4,7 +4,7 @@ const Weather = (props) => {
 
     return (
         <div className="container">
-            <div className="cards">
+            <div className="cards card-left">
                 <h1>{props.city}, {props.country}</h1>
                 <h5 className="py-4">
                     <img id="weatherImg" src={props.icon} />
@@ -35,6 +35,18 @@ const Weather = (props) => {
                 }
 
                 <button className="btn save-location-btn" onClick={props.displaySaved}><span className="plus-btn">+</span> Save location</button>
+            </div>
+            
+            <div className="cards card-flex card-right">
+                
+                <div className="card-col">
+                <p>SUNRISE</p>
+                <h3>{props.sunrise}</h3>
+                </div>
+                <div className="card-col">
+                <p>SUNSET</p>
+                <h3>{props.sunset}</h3>
+                </div>
             </div>
         </div>
     );
