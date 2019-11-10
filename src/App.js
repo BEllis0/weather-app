@@ -56,8 +56,7 @@ class App extends React.Component {
     })
 
     if (this.state.savedCities.length === 1) {
-      $('.main-section').css({'display': 'block', 'flex-direction': 'row', 'flex-wrap': 'nowrap', 'justify-content': 'space-evenly', 'align-items': 'center'});
-      $('.container').css('width', 'auto');
+      $('.container').css('margin-top', '100px');
     }
   }
 
@@ -88,25 +87,33 @@ class App extends React.Component {
     // create jquery file and move this ----
 
     $(function() {
-      $('.savedItem').hover(function() {
+
+      $('.container').css("margin-top", "16px");
+
+      $('.savedWeatherList').hover(function() {
         $('.remove-saved-btn').html('-');
         $('.remove-saved-btn').addClass("removeOnHover")
       }, function() {
-        $('.remove-saved-btn').html('');
-        $('#remove-saved-btn').removeClass("removeOnHover");
+        $('.remove-saved-btn').html('').removeClass("removeOnHover");
       })
     })
   };
+
+  currentDate = () => {
+    let daysArr = ["Monday", "Tuesday", "Wednesday", "Thursday", "FRIDAY", "Saturday", "Sunday"];
+    let day = daysArr[new Date().getDay()-1];
+    return day;
+  }
 
   convertDate = () => {
 
       let sunriseDate = new Date(this.state.sunrise * 1000)
       let sunriseHours = sunriseDate.getHours();
-      let sunriseMinutes = "0" + sunriseDate.getMinutes()
+      let sunriseMinutes = sunriseDate.getMinutes()
 
       let sunsetDate = new Date(this.state.sunset * 1000)
       let sunsetHours = sunsetDate.getHours();
-      let sunsetMinutes = "0" + sunsetDate.getMinutes()
+      let sunsetMinutes = sunsetDate.getMinutes()
       
       this.setState({
          sunrise: `${sunriseHours}:${sunriseMinutes}`,
@@ -290,6 +297,7 @@ class App extends React.Component {
 
           <div className="weather-main">
           <Weather 
+          currentDate={this.currentDate}
           city={this.state.city}
           country={this.state.country}
           weather={this.state.weatherDescription}
