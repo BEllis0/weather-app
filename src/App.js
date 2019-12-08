@@ -8,7 +8,7 @@ import SavedWeather from "/Users/brandonellis/Documents/Code Projects/weather-ap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
 
-const apiBase = "http://api.openweathermap.org/data/2.5/weather?";
+const apiBase = "https://api.openweathermap.org/data/2.5/weather?";
 const apiKey = "32710cb36385401192dab72b89409cea";
 
 class App extends React.Component {
