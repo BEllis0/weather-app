@@ -5,17 +5,21 @@
   "dependencies": {
     "@material-ui/core": "^4.5.2",
     "bootstrap": "^4.3.1",
+    "gh-pages": "^2.1.1",
     "jquery": "^3.4.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0"
   },
+  "homepage": "https://bellis0.github.io/weather-app",
   "engines": {
     "node": "12.6.0",
     "npm": "6.12.1"
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
