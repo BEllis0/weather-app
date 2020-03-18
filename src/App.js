@@ -7,9 +7,9 @@ import PreSearch from "/Users/brandonellis/Documents/Code Projects/weather-app/w
 import SavedWeather from "/Users/brandonellis/Documents/Code Projects/weather-app/weather-app/src/components/savedWeather.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
+import API_KEY from '../config.js';
 
 const apiBase = "https://api.openweathermap.org/data/2.5/weather?";
-const apiKey = "32710cb36385401192dab72b89409cea";
 
 class App extends React.Component {
   
@@ -157,7 +157,7 @@ class App extends React.Component {
   };
 
   getWeather = async () =>  {
-    const apiCall = fetch(`${apiBase}q=${this.state.userInputCity},${this.state.userInputCountry}&units=${this.state.unit}&appid=${apiKey}`)
+    const apiCall = fetch(`${apiBase}q=${this.state.userInputCity},${this.state.userInputCountry}&units=${this.state.unit}&appid=${API_KEY}`)
     .then(res => res.json())
     .then(res => {
       console.log(res);
